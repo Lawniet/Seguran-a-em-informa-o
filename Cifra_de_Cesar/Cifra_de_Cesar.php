@@ -9,7 +9,6 @@ $frase_criptografar = "The quick brown fox jumps over the lazy dog";
 /*Variáveis*/
 $frase_criptografada = ''; 
 $frase_descriptografada ='';
-
 function Cripto_this($frase_criptografar,$n_deslocamento)
 {
     /*Definindo o tamanho do alfabeto ultilizado*/
@@ -68,10 +67,8 @@ function Descripto_this($frase_criptografada,$n_deslocamento)
     }
     return $frase_descriptografada;
 }
-
 function countOcur($string, $stringCheck)
 {
-
    $count = 0;
    /*Separa as palavras*/
    $words = explode(" ", $stringCheck );
@@ -119,18 +116,16 @@ function Descripto_this_helper($frase_criptografada)
      $max = array_search(max($result) , $result);
      /*Lista dos caracteresmais frequentes na lingua inglesa*/
      $more_frequently = array('e','t','a','o','i','n','s','h','r','d','l','c','u','m','w','f','g','y','p','b','v','k','j','x','q','z');
-
      foreach ($more_frequently as $test)
      {
          /*Testa o deslocamento relativo com base no caractere mais frequente da lista dos mais frequentes*/
-         $desloc = ord($max) - ord($test);
+         $desloc = abs(ord($max) - ord($test));
          /*Tenta descriptografar com o deslocamento obtido*/
-         $frase_descriptografada = Descripto_this($frase_criptografada,$desloc);
+         $frase_descriptografada = Descripto_this($frase_criptografada, $desloc);
          /*Imprime a tentativa*/
          echo '<br/> Tentativa de descriptografia com deslocamento '.$desloc.': ' .$frase_descriptografada.'<br/>';
      }
 }
-
 $frase_criptografada = Cripto_this($frase_criptografar,$n_deslocamento);
 echo 'Frase original: ' .$frase_criptografar.'<br/>';
 echo '<br/> Frase criptografada: ' .$frase_criptografada.'<br/>';
